@@ -43,6 +43,9 @@
 }
 
 .time {
+    height: 50px;
+    width: 50px;
     font-size: 10px;
     margin: 0 0 0 1063px;
+    padding: 10px;
 }
