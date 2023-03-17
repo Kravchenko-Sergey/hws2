@@ -9,6 +9,7 @@
     border-style: none;
     border-radius: 20px;
     background-color: #F5F7FB;
+    resize: none;
     min-height: 40px;
     width: 976px;
     font-size: 14px;

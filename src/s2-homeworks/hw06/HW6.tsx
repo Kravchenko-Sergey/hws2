@@ -19,7 +19,6 @@ const HW6 = () => {
     }
     const restore = () => {
         // делают студенты
-
     }
 
     return (

@@ -1,7 +1,13 @@
 .input:focus {
+    outline: none;
+    border: 2px solid lightgrey;
 }
 
 .input {
+    height: 36px;
+    width: 372px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
 }
 
 .inputWrapper {

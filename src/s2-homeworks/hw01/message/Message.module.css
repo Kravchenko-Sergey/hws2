@@ -10,7 +10,6 @@
 }
 
 .imageAndText img {
-    margin: 0 680px 0 0;
     height: 48px;
     width: 48px;
 }
@@ -46,6 +45,6 @@
     height: 50px;
     width: 50px;
     font-size: 10px;
-    margin: 0 0 0 1063px;
-    padding: 10px;
+    margin: 0 0 0 924px;
+    padding: 0 10px;
 }
