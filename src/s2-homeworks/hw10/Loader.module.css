@@ -1,3 +1,5 @@
-.loader {
+.loader img {
     /*свг и/или анимация*/
+    height: 50px;
+    width: 50px;
 }

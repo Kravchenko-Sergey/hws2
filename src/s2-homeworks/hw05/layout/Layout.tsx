@@ -7,9 +7,9 @@ type PropsType = {
 }
 
 export const Layout: FC<PropsType> = ({ children }) => {
-    const [open, setOpen] = useState(false)
-    const handleClose = () => setOpen(false)
-    const handleOpen = () => setOpen(true)
+    const [open, setOpen] = useState(true)
+    const handleClose = () => setOpen(true)
+    const handleOpen = () => setOpen(false)
 
     useEffect(() => {
         open && (document.body.style.overflow = 'hidden')
@@ -17,6 +17,7 @@ export const Layout: FC<PropsType> = ({ children }) => {
     }, [open]) // отключает прокрутку при открытом меню
 
     return (
+
         <>
             <Sidebar open={open} handleClose={handleClose} />
             <Header handleOpen={handleOpen} />
