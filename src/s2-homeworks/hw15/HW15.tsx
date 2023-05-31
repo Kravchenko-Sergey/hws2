@@ -30,7 +30,7 @@ type ParamsType = {
 const getTechs = (params: ParamsType) => {
     return axios
         .get<{ techs: TechType[], totalCount: number }>(
-            'https://incubator-personal-page-back.herokuapp.com/api/3.0/homework/test3',
+            'https://samurai.it-incubator.io/api/3.0/homework/test3',
             {params}
         )
         .catch((e) => {
@@ -51,8 +51,14 @@ const HW15 = () => {
         setLoading(true)
         getTechs(params)
             .then((res) => {
+            console.log(params)
                 // делает студент
-
+            //onChangePagination(params.page, params.count)
+            if(res) {
+                setTechs(res.data.techs)
+                setTotalCount(res.data.totalCount)
+            }
+            setLoading(false)
                 // сохранить пришедшие данные
 
                 //
@@ -61,26 +67,39 @@ const HW15 = () => {
 
     const onChangePagination = (newPage: number, newCount: number) => {
         // делает студент
-
+        console.log(newPage)
+        console.log(newCount)
         // setPage(
         // setCount(
+        setPage(newPage)
+        setCount(newCount)
+        sendQuery({newPage, newCount})
+        // sendQuery(
+        // setSearchParams(
+        const page = searchParams.get('page')
+        const count = searchParams.get('count')
 
+        setSearchParams({page: String(newPage), count: String(newCount)})
+        console.log(searchParams)
+        //
+    }
+
+    const onChangeSort = (newSort: string) => {
+        // делает студент
+        console.log(newSort)
+        // setSort(
+        //setPage(1) // при сортировке сбрасывать на 1 страницу
         // sendQuery(
         // setSearchParams(
 
         //
     }
 
-    const onChangeSort = (newSort: string) => {
-        // делает студент
-
-        // setSort(
-        // setPage(1) // при сортировке сбрасывать на 1 страницу
-
-        // sendQuery(
-        // setSearchParams(
-
-        //
+    const onChangeSelect2 = (newPage: number, newCount: number) => {
+        console.log(newPage)
+        console.log(newCount)
+        setCount(newCount)
+        sendQuery({newPage, newCount})
     }
 
     useEffect(() => {
@@ -88,7 +107,7 @@ const HW15 = () => {
         sendQuery({page: params.page, count: params.count})
         setPage(+params.page || 1)
         setCount(+params.count || 4)
-    }, [])
+    }, [page])
 
     const mappedTechs = techs.map(t => (
         <div key={t.id} className={s.row}>
@@ -114,6 +133,10 @@ const HW15 = () => {
                     itemsCountForPage={count}
                     totalCount={totalCount}
                     onChange={onChangePagination}
+                    count={count}
+                    setCount={setCount}
+                    sendQuery={sendQuery}
+                    onChangeSelect2={onChangeSelect2}
                 />
 
                 <div className={s.rowHeader}>
