@@ -51,55 +51,39 @@ const HW15 = () => {
         setLoading(true)
         getTechs(params)
             .then((res) => {
-            console.log(params)
                 // делает студент
-            //onChangePagination(params.page, params.count)
-            if(res) {
-                setTechs(res.data.techs)
-                setTotalCount(res.data.totalCount)
-            }
-            setLoading(false)
+                if (res) {
+                    setTotalCount(res.data.totalCount)
+                    setTechs(res.data.techs)
+                }
                 // сохранить пришедшие данные
-
+                setLoading(false)
                 //
             })
     }
 
     const onChangePagination = (newPage: number, newCount: number) => {
         // делает студент
-        console.log(newPage)
-        console.log(newCount)
-        // setPage(
-        // setCount(
+
         setPage(newPage)
         setCount(newCount)
-        sendQuery({newPage, newCount})
-        // sendQuery(
-        // setSearchParams(
-        const page = searchParams.get('page')
-        const count = searchParams.get('count')
 
-        setSearchParams({page: String(newPage), count: String(newCount)})
-        console.log(searchParams)
+        sendQuery({page: newPage, count: newCount})
+        setSearchParams()
+
         //
     }
 
     const onChangeSort = (newSort: string) => {
         // делает студент
-        console.log(newSort)
-        // setSort(
-        //setPage(1) // при сортировке сбрасывать на 1 страницу
-        // sendQuery(
-        // setSearchParams(
+
+        setSort(newSort)
+        setPage(1) // при сортировке сбрасывать на 1 страницу
+
+        sendQuery({sort: newSort, page: page, count: count})
+        setSearchParams()
 
         //
-    }
-
-    const onChangeSelect2 = (newPage: number, newCount: number) => {
-        console.log(newPage)
-        console.log(newCount)
-        setCount(newCount)
-        sendQuery({newPage, newCount})
     }
 
     useEffect(() => {
@@ -107,7 +91,7 @@ const HW15 = () => {
         sendQuery({page: params.page, count: params.count})
         setPage(+params.page || 1)
         setCount(+params.count || 4)
-    }, [page])
+    }, [])
 
     const mappedTechs = techs.map(t => (
         <div key={t.id} className={s.row}>
@@ -126,27 +110,27 @@ const HW15 = () => {
             <div className={s2.hwTitle}>Homework #15</div>
 
             <div className={s2.hw}>
-                {idLoading && <div id={'hw15-loading'} className={s.loading}>Loading...</div>}
+                {idLoading && <div id={'hw15-loading'} className={s.loading}>
+                    <div className={s.fone}>
+                        ...loading
+                    </div>
+                </div>}
 
                 <SuperPagination
                     page={page}
                     itemsCountForPage={count}
                     totalCount={totalCount}
                     onChange={onChangePagination}
-                    count={count}
-                    setCount={setCount}
-                    sendQuery={sendQuery}
-                    onChangeSelect2={onChangeSelect2}
                 />
 
                 <div className={s.rowHeader}>
                     <div className={s.techHeader}>
-                        tech
+                        Tech
                         <SuperSort sort={sort} value={'tech'} onChange={onChangeSort}/>
                     </div>
 
                     <div className={s.developerHeader}>
-                        developer
+                        Developer
                         <SuperSort sort={sort} value={'developer'} onChange={onChangeSort}/>
                     </div>
                 </div>
@@ -158,3 +142,7 @@ const HW15 = () => {
 }
 
 export default HW15
+
+const downIcon = '[\\/]'
+const upIcon = '[/\\]'
+const noneIcon = '[--]'
